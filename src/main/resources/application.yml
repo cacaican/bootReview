@@ -1,0 +1,26 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /demo
+#集成hibernate
+spring:
+#  jpa:
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQLDialect
+#        new_generator_mappings: false
+#        format_sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC&useSSL=false&autoReconnect=true&tinyInt1isBit=false&useUnicode=true&characterEncoding=utf8
+    username: testUser
+    password: Tu123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#注意pom依赖，不要用单独的mybatis，否则这里会实例化失败sqlSessionFactory，需要你手动实例化；应该使用springboot集成的mybatis starter
+mybatis:
+  configuration:
+    #在Springboot中，可以通过设置map-underscore-to-camel-case属性为true来开启驼峰功能。
+    map-underscore-to-camel-case: true
+  # 配置实体地址
+  type-aliases-package: com.xiaocai.bootreview.ssm.entity
+  # 配置Mapper.xml地址
+  mapper-locations: classpath:/mapper/*.xml

@@ -1,0 +1,25 @@
+过滤器这里指Servlet过滤器，它是在java Servlet中定义的，能够对Servlet容器中的请求和响应对象，进行检查和修改,它不会生成request和response对象，它只起到过滤的作用；
+拦截器这里指Spring MVC中的拦截器（Interceptor），它类似于Servlet中的过滤器（Filter），它主要用于拦截用户请求并作相应的处理。
+
+一、应用场景
+1、过滤器的应用：字符编码转换，敏感词过滤、登陆权限验证、资源访问权限等；
+2、拦截器的应用：AOP、需要有一些业务逻辑（需要注入Bean等）。
+
+二、区别
+1、过滤器配置再web.xml中、拦截器配置springmvc的配置文件中（即在DispatcherServlet的contextConfigLocation属性指定文件所在位置，默认加载的是：/WEB-INF/servlet名称-servlet.xml(springmvc-servlet.xml)）；
+2、过滤器基于函数回调、拦截器基于反射；
+3、过滤器几乎对所有请求起作用，拦截器只对目标执行方法（action方法）起作用；
+4、过滤器对请求进行预处理、再交给Servlet处理并且生成响应，最后Filter再对服务器响应进行后处理；
+拦截器可以在方法执行前调用（preHandle），方法执行后调用（postHandle），视图页面渲染后调用（afterCompletion）。
+
+三、执行流程
+1、过滤器执行流程：
+客户端发起请求的时候，首先是经过了Filter过滤器，处理了request请求，然后去执行了我们的servlet/jsp，当执行完毕后，我们的response响应也经过了过滤器，这里经过过滤器的时候是从放行后面开始执行的，也就是处理了response响应。
+
+2、拦截器执行流程：
+（1）、程序先执行preHandle()方法，如果该方法的返回值为true，则程序会继续向下执行处理器中的方法，否则将不再向下执行；
+（2）、在业务处理器（即控制器Controller类）处理完请求后，会执行postHandle()方法，然后会通过DispatcherServlet向客户端返回响应；
+（3）、在DispatcherServlet处理完请求后，才会执行afterCompletion()方法。
+
+
+ （3）监听器：统计在线人数、清除过期session。
