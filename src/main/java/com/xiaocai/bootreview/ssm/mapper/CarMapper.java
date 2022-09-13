@@ -27,5 +27,7 @@ public interface CarMapper {
     @Select("select count(1) from car")
     int  count();
 
+    List getCarByBrand(String brand);
+
 
 }

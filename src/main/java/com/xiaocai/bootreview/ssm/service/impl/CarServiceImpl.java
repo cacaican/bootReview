@@ -6,6 +6,8 @@ import com.xiaocai.bootreview.ssm.service.ICarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @ClassName CarServiceImpl
  * @Description TODO
@@ -23,5 +25,17 @@ public class CarServiceImpl implements ICarService {
 
         Car car = carMapper.getCarById(id);
         return car;
+    }
+
+    @Override
+    public List<Car> getCarsByBrand(String brand) {
+        List car = carMapper.getCarByBrand("%"+brand+"%");
+        return car;
+    }
+
+    @Override
+    public boolean createCar(Car car) {
+        boolean car1 = carMapper.createCar(car);
+        return car1;
     }
 }
