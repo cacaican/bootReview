@@ -14,7 +14,6 @@ import java.util.Date;
 public class Driver {
 
     private int id;
-    private int car_id;
     private String name;
     private String license;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")

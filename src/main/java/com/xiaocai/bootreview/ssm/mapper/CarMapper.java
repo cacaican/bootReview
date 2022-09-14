@@ -1,10 +1,12 @@
 package com.xiaocai.bootreview.ssm.mapper;
 
 import com.xiaocai.bootreview.ssm.entity.Car;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.DateTypeHandler;
+import org.apache.ibatis.type.TypeHandler;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +29,10 @@ public interface CarMapper {
     @Select("select count(1) from car")
     int  count();
 
-    List getCarByBrand(String brand);
+    List<Car> getCarByBrand(String brand);
+
+    @Select("select * from car where driverId = #{driverId}")
+    List<Car> getCarByDriverId(String driverId);
 
 
 }

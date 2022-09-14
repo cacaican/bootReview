@@ -45,3 +45,11 @@ mybatis:
 logging:
   level:
     com.xiaocai.bootreview.ssm.mapper: debug
+    java.sql.ResultSet: INFO
+    org.apache: INFO
+    java.sql.Connection: DEBUG
+    java.sql.Statement: DEBUG
+    java.sql.PreparedStatement: DEBUG
+    com.rjxy.aowu.dao: TRACE
+
+#    原文链接：https://blog.csdn.net/weixin_43592699/article/details/109829105

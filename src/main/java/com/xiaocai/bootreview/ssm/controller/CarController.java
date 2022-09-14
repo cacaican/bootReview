@@ -51,4 +51,13 @@ public class CarController {
         return new ObjectMapper().writeValueAsString(cars);
     }
 
+    @RequestMapping("/getCarsByDriverId")
+    public String getCarsByDriverId(@RequestParam(value = "driverId") String driverId) throws  Exception {
+        System.out.println("调用了controller中的/getCarsByDriverId");
+        List<Car> cars = carService.getCarsByDriverId(driverId);
+        Optional.ofNullable(cars).orElseThrow(() -> new RuntimeException(String.format("driverId为%s的车辆记录不存在",driverId)));
+        return new ObjectMapper().writeValueAsString(cars);
+    }
+
+
 }

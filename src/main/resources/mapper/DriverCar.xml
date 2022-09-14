@@ -1,48 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xiaocai.springboot.integration.ssm.mapper.DriverCarMapper">
+<mapper namespace="com.xiaocai.bootreview.ssm.mapper.DriverCarMapper">
 
 
-    <select id="getDriverCarByDriverName" resultType="java.util.HashMap">
-        select * from driver  d join car c
-            on d.car_brand=c.brand
-        where d.name = #{name}
+    <!--方法一，多次查询，getDriverCarByDriverName依赖getCarByDriverId的结果-->
+    <resultMap type="com.xiaocai.bootreview.ssm.po.DriverCarsPo" id="DriverCarsPos">
+        <id property="id" column="id" />
+
+        <result property="name" column="name" />
+        <result property="license" column="license" />
+        <result property="createDate" column="createDate" />
+         <!--一对多级联查询，ofType表示集合中的元素类型，将id传递给selectOrderById -->
+        <collection property="cars"
+                    ofType="com.xiaocai.bootreview.ssm.entity.Car"
+                    column="id"
+                    select="com.xiaocai.bootreview.ssm.mapper.CarMapper.getCarByDriverId" />
+        <!--这里column关联的是外面传给里面的id，就是driver查询结果传给getCarByDriverId的如van-->
+    </resultMap>
+    <select id="getDriverCarByDriverName" parameterType="java.lang.String"
+            resultMap="DriverCarsPos">
+        select * from driver where name=#{driverName}
     </select>
 
-    <!--<resultMap id="driverCars" type="driver">
-        <result property="name" column="name"></result>
-        <result property="license" column="license"></result>
-        <result property="car_brand" column="car_brand"></result>
-        <result property="email" column="email"></result>
-        <collection property="roles" ofType="Role">
-            <id property="id" column="role_id"></id>
-            <result property="name" column="role_name"></result>
-        </collection>
-    </resultMap>-->
-    <!--<resultMap id="userMap" type="User">
-        <id property="id" column="id"></id>
-        <result property="username" column="username"></result>
-        <result property="password" column="password"></result>
-        <result property="address" column="address"></result>
-        <result property="email" column="email"></result>
 
-        <collection property="roles" ofType="Role">
-            <id property="id" column="role_id"></id>
-            <result property="name" column="role_name"></result>
+    <!--    这里要注意，当两张表中有相同名称的列时，需要在select语句和结果映射定义的时候起别名，否则指挥返回一条-->
+    <resultMap id="DriverCarsPos2" type="com.xiaocai.bootreview.ssm.po.DriverCarsPo">
+        <id property="id" column="did" />
+        <result property="name" column="name" />
+        <result property="license" column="license" />
+        <result property="createDate" column="createDate" />
+        <!--一对多级联查询，ofType表示集合中的元素类型，将id传递给selectOrderById -->
+        <collection property="cars"
+                    ofType="com.xiaocai.bootreview.ssm.entity.Car">
+            <id property="id" column="id" />
+            <result property="brand" column="brand" />
+            <result property="color" column="color" />
+            <result property="seats" column="seats" />
+            <result property="price" column="price" />
+            <result property="createDate" column="createDate" />
+            <result property="driverId" column="driverId" />
         </collection>
+        <!--这里column关联的是外面传给里面的id，就是driver查询结果传给getCarByDriverId的如van-->
     </resultMap>
-    &lt;!&ndash; 一对多：嵌套 Select 查询 &ndash;&gt;
-    <resultMap id="menusMap" type="Menu">
-        <id property="id" column="id"></id>
-        <result property="name" column="name"></result>
-        <result property="url" column="url"></result>
-        <result property="m_desc" column="m_desc"></result>
-        <result property="parent_id" column="parent_id"></result>
-        &lt;!&ndash; ofType="Menu" 对应返回数据的类型&ndash;&gt;
-        &lt;!&ndash;select="getMenus" 指定了SELECT语句的id&ndash;&gt;
-        &lt;!&ndash;column="{parent_id=id}" 则是列的别名，参数的表达式&ndash;&gt;
-        <collection property="childMenu" ofType="Menu" select="getMenus" column="{parent_id=id}"></collection>
-    </resultMap>-->
-
+    <select id="getDriverCarByDriverName2"
+            resultMap="DriverCarsPos2">
+        select d.id as did, d.name,d.license,d.createDate,c.* from driver d ,car c where d.id = c.driverId and d.name =#{driverName}
+    </select>
 </mapper>

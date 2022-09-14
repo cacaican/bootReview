@@ -38,4 +38,10 @@ public class CarServiceImpl implements ICarService {
         boolean car1 = carMapper.createCar(car);
         return car1;
     }
+
+    @Override
+    public List<Car> getCarsByDriverId(String driverId) {
+        List car =  carMapper.getCarByDriverId(driverId);
+        return car;
+    }
 }

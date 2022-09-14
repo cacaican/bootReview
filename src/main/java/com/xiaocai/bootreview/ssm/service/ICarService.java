@@ -11,4 +11,6 @@ public interface ICarService {
     List<Car> getCarsByBrand(String brand);
 
     boolean createCar(Car car);
+
+    List<Car> getCarsByDriverId(String driverId);
 }
