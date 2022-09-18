@@ -1,0 +1,9 @@
+1.引入依赖
+~~~xml
+ <!--springboot项目集成quartz依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+~~~
+2.

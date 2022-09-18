@@ -61,7 +61,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <version>${springboot.version}</version>
-
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -86,8 +85,16 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-
-
+        <!--springboot项目集成quartz依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.0</version>
+        </dependency>
     </dependencies>
 
     <build>

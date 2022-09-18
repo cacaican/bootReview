@@ -10,11 +10,37 @@ spring:
 #        dialect: org.hibernate.dialect.MySQLDialect
 #        new_generator_mappings: false
 #        format_sql: true
+  task:
+    scheduling:
+      pool:
+        size: 8
+      #用于新创建线程名称的前缀。
+      thread-name-prefix: springboot-self-
+      shutdown:
+        await-termination: true
+        #执行程序是否应等待计划任务在关机时完成
   datasource:
     url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC&useSSL=false&autoReconnect=true&tinyInt1isBit=false&useUnicode=true&characterEncoding=utf8
     username: testUser
     password: Tu123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtualHost: /
+#    publisher-confirms: true #开启消息确认机制：已经过期
+#    publisherConfirmType: NONE
+#      SIMPLE,在范围操作中使用RabbitTemplate#waitForConfirms() （或waitForConfirmsOrDie()
+#      CORRELATED, 与CorrelationData一起使用以将确认与发送的消息相关联。
+#      NONE：发布者确认被禁用（默认）。
+#    publisher-returns: true #支持消息发送失败返回队列
+#    listener:
+#      type: simple
+#      simple:
+#        default-requeue-rejected: false
+#        acknowledge-mode: manual
   redis:
     # Redis服务器地址
     host: localhost
@@ -51,5 +77,16 @@ logging:
     java.sql.Statement: DEBUG
     java.sql.PreparedStatement: DEBUG
     com.rjxy.aowu.dao: TRACE
-
 #    原文链接：https://blog.csdn.net/weixin_43592699/article/details/109829105
+#自定义私信队列配置
+app:
+  rabbitmq:
+    # 队列定义
+    queue:
+      user: user-queue
+      dead: user-dead-queue
+    # 交换机定义
+    exchange:
+      user: user-exchange
+      dead: user-dead-exchange
+#  原文链接：https://blog.csdn.net/weixin_44507274/article/details/105469344
