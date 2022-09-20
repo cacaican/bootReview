@@ -1,6 +1,7 @@
 package com.xiaocai.bootreview.mapDemo;
 
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @ClassName MapDemo
@@ -14,7 +15,12 @@ public class MapDemo {
     public static void main(String[] args) {
 
         //测试了下hashMap，并且复习了下hashmap的存值逻辑和扩容逻辑
-        testHashMap();
+        //testHashMap();
+        //
+        ConcurrentHashMap<Object, Object> map = new ConcurrentHashMap<>();
+        map.put("xiao","cai");
+        map.put("han","meimei");
+        map.forEach((key,v)-> System.out.printf("key--\t %s \t value---%s",key,v));
     }
 
     private static void testHashMap() {
