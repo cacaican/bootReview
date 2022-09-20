@@ -26,7 +26,7 @@ public class EasyExcelSimpleDemo {
 
         String filePath = "D:/workspace/idea/bootReview/target/classes";
         String fileName = "1663583629507.xlsx";
-
+//测试写数据
         testRead(filePath, fileName);
     }
 
@@ -36,6 +36,7 @@ public class EasyExcelSimpleDemo {
         EasyExcel.read(filePath + "/" + fileName)
                 .head(DemoUser.class)    //指定对象
                 .sheet(0)
+
                 .registerReadListener(new AnalysisEventListener<DemoUser>() {    //使用类对象
                     @Override
                     public void invoke(DemoUser testModel2, AnalysisContext analysisContext) {
