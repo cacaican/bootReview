@@ -1,16 +1,15 @@
 package com.xiaocai.bootreview.threadPool;
 
 import com.xiaocai.bootreview.AbstractTest;
+import com.xiaocai.bootreview.threadPool.task.CallableTask1;
+import com.xiaocai.bootreview.threadPool.task.FutureTask2;
+import com.xiaocai.bootreview.threadPool.task.RunnableTask1;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ThreadTest extends AbstractTest {
 

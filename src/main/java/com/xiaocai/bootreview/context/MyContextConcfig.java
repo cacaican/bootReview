@@ -1,4 +1,4 @@
-package com.xiaocai.bootreview;
+package com.xiaocai.bootreview.context;
 
 import org.springframework.context.annotation.Configuration;
 
@@ -9,5 +9,5 @@ import org.springframework.context.annotation.Configuration;
  * @Date 2022/9/22
  */
 @Configuration
-public class MycontextConcfig {
+public class MyContextConcfig {
 }

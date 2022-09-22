@@ -6,11 +6,11 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @description:
+ * @description: 自定义线程测试类
  * @author: xiaocai
  * @time: 2022/3/26 22:17
  */
-public class ThreadService {
+public class TestOriginThreadPool {
 
     public static void main(String[] args) {
         testFixedThreadPool();
