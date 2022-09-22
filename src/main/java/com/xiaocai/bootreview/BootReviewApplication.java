@@ -15,8 +15,46 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling //开启定时任务
 public class BootReviewApplication {
 
+
+    //复习下springboot的启动过程
+    //首先看SpringApplication的new过程
+    //定义了以下几个资源
+        /*
+        primarySources：自己
+        webApplicationType：推断应用类型
+        设置引导注册表初始化程序：bootstrapRegistryInitializers
+
+        */
+    //创建工厂实例：META-INF/spring.factories
+    //初始化上下文
+    //初始化监听器setInitializers
+    //deduceMainApplicationClass
+
+
+    //run方法的使用
+   /* 1.记录启动时间
+    2.创建启动上下文createBootstrapContext
+//    3.设置异常报告期2.6版本没有这个
+    3.设置configureHeadlessProperty属性
+    4.SpringApplicationRunListeners：获取监听器并且开启监听
+
+
+    创建applicationArguments
+    准备运行环境：prepareEnvironment
+    configureIgnoreBeanInfo
+    打印banner：printBanner
+    创建应用上下文：createApplicationContext
+    设置启动：setApplicationStartup
+    prepareContext
+    refreshContext
+    afterRefresh
+    listeners.started(）
+    callRunners：在刷新上下文后调用*/
     public static void main(String[] args) {
+
         SpringApplication.run(BootReviewApplication.class, args);
+//        SpringApplication application = new SpringApplication();
+//        application.run(args);
     }
 
 }
